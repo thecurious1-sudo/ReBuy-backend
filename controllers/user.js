@@ -21,11 +21,11 @@ module.exports.signupController = async (req, res) => {
     await user.save();
     const data = {
       id: user._id,
-      username: user.username,
     };
     res.json({
       status: "ok",
-      data: await generateAccessToken(data),
+      data: data,
+      token: await generateAccessToken(data),
     });
   } catch (err) {
     console.log(err.message);
@@ -35,8 +35,8 @@ module.exports.signupController = async (req, res) => {
 
 module.exports.loginController = async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username });
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
     if (!user) {
       return res.json({
         status: "error",
@@ -52,11 +52,11 @@ module.exports.loginController = async (req, res) => {
     }
     const data = {
       id: user._id,
-      username: user.username,
     };
     res.json({
       status: "ok",
-      data: await generateAccessToken(data),
+      data: data,
+      token: await generateAccessToken(data),
     });
   } catch (err) {
     console.log(err.message);
