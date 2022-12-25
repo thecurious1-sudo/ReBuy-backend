@@ -26,6 +26,12 @@ const userSchema = new mongoose.Schema(
     phone: {
       type: String,
     },
+    products: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Product`,
+      },
+    ],
   },
   {
     // Keep the created and updated time
