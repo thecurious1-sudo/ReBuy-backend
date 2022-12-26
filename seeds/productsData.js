@@ -11,6 +11,7 @@ module.exports = async (user) => {
       price: faker.commerce.price(),
       img: faker.image.imageUrl(),
       user: user._id,
+      address: faker.address.streetAddress(),
     };
     products.push(product);
   }
