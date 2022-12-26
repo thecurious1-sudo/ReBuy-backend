@@ -32,6 +32,10 @@ const productSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: `User`,
     },
+    order: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: `Order`,
+    },
   },
   {
     // Keep the created and updated time
