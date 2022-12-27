@@ -50,15 +50,21 @@ module.exports.getOrderById = async (req, res, next) => {
   try {
     const { id } = req.params;
     // const order = await res.json({ status: `ok`, data: order });
-    // find order and populate product and inside product, populate user
-    const order = await Order.findById(id).populate({
-      path: "product",
-      model: "Product",
-      populate: {
+    // find order and populate product and user and inside product, populate user
+
+    const order = await Order.findById(id)
+      .populate({
+        path: "product",
+        model: "Product",
+        populate: {
+          path: "user",
+          model: "User",
+        },
+      })
+      .populate({
         path: "user",
         model: "User",
-      },
-    });
+      });
 
     // const order = await Order.findById(id).populate({
     //   path: "product",
@@ -66,6 +72,7 @@ module.exports.getOrderById = async (req, res, next) => {
     // });
     res.locals.orderUser = order.user._id.toString();
     res.locals.data = order;
+    res.json({ status: `ok`, data: order });
     next();
   } catch (err) {
     console.log(err);

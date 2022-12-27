@@ -8,6 +8,6 @@ const router = require("express").Router();
 
 router.post("/", getAllOrdersByUser);
 router.post("/new", createNewOrder);
-router.post("/:id", getOrderById, isUserAuthorizedForOrderDetails);
+router.post("/:id", getOrderById);
 
 module.exports = router;

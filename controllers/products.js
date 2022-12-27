@@ -49,6 +49,10 @@ module.exports.createProduct = async (req, res) => {
       `user`,
       `name`
     );
+    //inserthis product in user's products array
+    await User.findById(userId) //find user by id
+      .updateOne({ $push: { products: product._id } });
+
     res.json({ status: `ok`, data: populatedProduct });
   } catch (err) {
     console.log(err.message);

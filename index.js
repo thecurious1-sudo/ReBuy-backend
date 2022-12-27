@@ -23,6 +23,8 @@ app.use("/products", authenticateToken, require("./routes/products"));
 
 app.use("/orders", authenticateToken, require("./routes/orders"));
 
+app.use("/myitems", authenticateToken, require("./routes/myItems"));
+
 const startServer = async () => {
   await openConnection();
   await app.listen(4000, () => {
